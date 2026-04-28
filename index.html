@@ -85,7 +85,7 @@
         -webkit-overflow-scrolling: touch;
     }
 
-    #diachinh-map { 
+    #diachinh-map, #my-maps-list{ 
         flex-grow: 1; height: 100%; background: #e5e3df; z-index: 1; position: relative; 
     }
     
@@ -217,8 +217,8 @@
     /* TƯƠNG THÍCH MOBILE TỔNG HỢP */
     /* ------------------------------------------------------------------- */
     @media (max-width: 768px) {
-        #diachinh-app { flex-direction: column; }
-        #diachinh-map { order: 1; height: 80%; width: 100%; flex-grow: 0; }
+        #diachinh-app, #my-maps-list { flex-direction: column; }
+        #diachinh-map, #my-maps-list { order: 1; height: 80%; width: 100%; flex-grow: 0; }
         #divider { order: 2; display: flex !important; }
         
         #diachinh-sidebar { 
@@ -445,7 +445,7 @@
 <script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-auth-compat.js"></script>
 
-  <script type="module" crossorigin src="/assets/index-uH0OK7-R.js"></script>
+  <script type="module" crossorigin src="/assets/index-C4jBHhtx.js"></script>
 </head>
 <body>
 
@@ -459,6 +459,39 @@
         
         <h3 style="margin-top:0; display: none;">📍 Quick Map Share .com</h3>
         
+        <div id="auth-box" style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; max-width: 300px; text-align: center; margin: 20px auto;">
+          <div id="user-info" style="display: none; margin-bottom: 15px;">
+            <img id="user-avatar" src="" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-bottom: 10px;">
+            <div id="user-name" style="font-weight: bold; font-family: sans-serif;"></div>
+          </div>
+
+          <div id="inapp-warning-box" style="display: none; background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 12px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; text-align: center; line-height: 1.5;">
+            <strong>&#9888;&#65039; <span data-i18n="auth.inapp_warn_title">Unsupported Browser</span></strong><br>
+            <span data-i18n="auth.inapp_warn_desc">Please tap the 3 dots in the top right corner and select "Open in browser" (Chrome/Safari) to sign in with Google.</span>
+          </div>
+
+          <div id="btn-login" style="font-family: sans-serif; font-size: 14px; color: #555; text-align: center; padding: 10px 0;">
+            <span data-i18n="auth.manage_maps">Manage your maps easily:</span> 
+            <a data-i18n="auth.sign_in" href="javascript:void(0)" onclick="loginGoogle()" onmouseout="this.style.textDecoration='none'" onmouseover="this.style.textDecoration='underline'" style="color: #1a73e8; text-decoration: none; font-weight: 600; white-space: nowrap;">
+              Sign in with Google
+            </a>
+          </div>
+          
+          <button data-i18n="auth.sign_out" id="btn-logout" onclick="logout()" style="display: none; background: #ea4335; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-family: sans-serif; font-size: 14px; width: 100%; margin-top: 10px;">
+            Sign out
+          </button>
+          
+          <div id="my-maps-box" style="display: none; margin-top: 15px; text-align: left; border-top: 1px solid #eee; padding-top: 15px;">
+            
+            <a href="javascript:void(0)" onclick="window.showMyMapList()" style="color: blue; cursor: pointer; text-decoration: none;">
+                <span data-i18n="auth.my_maps_title" style="pointer-events: none; font-weight: bold; font-family: sans-serif; font-size: 14px; color: #333; text-decoration: underline;">
+                    Bản đồ của tôi
+                </span>
+            </a>
+          </div>
+        </div>    
+
+
         <div style="display: none;">
             <label data-i18n="sidebar.select_province">Select Province:</label>
             <select id="meridian"></select>
@@ -510,33 +543,7 @@
             </div>          
         </div>
       
-        <div id="auth-box" style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; max-width: 300px; text-align: center; margin: 20px auto;">
-          <div id="user-info" style="display: none; margin-bottom: 15px;">
-            <img id="user-avatar" src="" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-bottom: 10px;">
-            <div id="user-name" style="font-weight: bold; font-family: sans-serif;"></div>
-          </div>
-
-          <div id="inapp-warning-box" style="display: none; background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 12px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; text-align: center; line-height: 1.5;">
-            <strong>&#9888;&#65039; <span data-i18n="auth.inapp_warn_title">Unsupported Browser</span></strong><br>
-            <span data-i18n="auth.inapp_warn_desc">Please tap the 3 dots in the top right corner and select "Open in browser" (Chrome/Safari) to sign in with Google.</span>
-          </div>
-
-          <div id="btn-login" style="font-family: sans-serif; font-size: 14px; color: #555; text-align: center; padding: 10px 0;">
-            <span data-i18n="auth.manage_maps">Manage your maps easily:</span> 
-            <a data-i18n="auth.sign_in" href="javascript:void(0)" onclick="loginGoogle()" onmouseout="this.style.textDecoration='none'" onmouseover="this.style.textDecoration='underline'" style="color: #1a73e8; text-decoration: none; font-weight: 600; white-space: nowrap;">
-              Sign in with Google
-            </a>
-          </div>
-          
-          <button data-i18n="auth.sign_out" id="btn-logout" onclick="logout()" style="display: none; background: #ea4335; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-family: sans-serif; font-size: 14px; width: 100%; margin-top: 10px;">
-            Sign out
-          </button>
-          
-          <div id="my-maps-box" style="display: none; margin-top: 15px; text-align: left; border-top: 1px solid #eee; padding-top: 15px;">
-            <div data-i18n="auth.my_maps_title" style="font-weight: bold; font-family: sans-serif; font-size: 14px; margin-bottom: 10px; color: #333;">Bản đồ của tôi:</div>
-            <div id="my-maps-list" style="font-family: sans-serif; font-size: 13px;"></div>
-          </div>
-        </div>      
+  
     </div>
     
     <div id="divider">
@@ -545,7 +552,7 @@
     
     <div id="diachinh-map">
     </div>
-    
+    <div id="my-maps-list" style="display: none;"></div>
     
 </div>
 
