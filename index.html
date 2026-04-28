@@ -68,8 +68,369 @@
             margin: 0 auto; /* Tự động căn giữa ảnh vào giữa khung chứa */
         }
 
+    body, html { margin: 0; padding: 0; height: 100%; height: 100dvh; overflow: hidden; }
 
+    #diachinh-app {
+        display: flex; flex-direction: row; 
+        height: 100vh; height: 100dvh; 
+        width: 100%; 
+        font-family: &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif; margin: 0; box-sizing: border-box;
+    }
+    
+    #diachinh-sidebar {
+        width: 321px; padding: 15px; background: #f9f9f9; 
+        box-sizing: border-box; border-right: 1px solid #ddd;
+        height: 100%; 
+        overflow-y: auto; 
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #diachinh-map { 
+        flex-grow: 1; height: 100%; background: #e5e3df; z-index: 1; position: relative; 
+    }
+    
+    #diachinh-map .leaflet-control-scale { margin-bottom: 12px; }
+
+    #divider {
+        display: none; height: 24px; background-color: #f9f9f9; cursor: row-resize;
+        justify-content: center; align-items: center; touch-action: none;
+        z-index: 11; border-radius: 15px 15px 0 0; margin-top: -12px;
+        box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+    }
+    #divider .drag-handle { width: 40px; height: 5px; background-color: #bdc3c7; border-radius: 3px; }
+
+    #diachinh-sidebar input, #diachinh-sidebar select, #diachinh-sidebar button, #diachinh-sidebar textarea {
+        width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;
+    }
+  
+
+  
+
+  
+
+    
+    #meridian { border: 2px solid #3498db; font-weight: bold; }
+    #customM-box { display: none; background: #e8f4fd; padding: 10px; border-radius: 4px; margin-bottom: 10px; }
+
+    .btn-draw { background: #27ae60; color: white; border: none; font-weight: bold; cursor: pointer; padding: 10px !important; }
+    .btn-share { background: #3498db; color: white; border: none; font-weight: bold; cursor: pointer; padding: 10px !important; }
+    button:hover { opacity: 0.9; }
+    #btnShareLink { margin-top: 10px !important; }  
+    
+    .btn-gmap { 
+        position: absolute !important; bottom: 40px !important; right: 15px !important;
+        z-index: 99999 !important; background: #ea4335; color: white; border: none; font-weight: bold; cursor: pointer; 
+        display: none; padding: 12px 20px !important; border-radius: 4px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.4); width: auto !important;
+    }
+
+    #results {
+        margin-top: 10px;
+    }
+
+    .table-container {
+        margin-top: 5px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    table#edgeTable { 
+        width: 100%; border-collapse: collapse; table-layout: fixed; 
+        font-size: 13px; background: transparent; margin: 0;
+    }
+
+    table#edgeTable th, table#edgeTable td { 
+        border: 1px solid rgba(0, 0, 0, 0.1); padding: 8px 6px; 
+    }
+
+    #edgeTable th:first-child, #edgeTable td:first-child { width: 45%; text-align: left; padding-left: 10px; }
+    #lengthHeader, #edgeTable td:nth-child(2) { width: 55%; text-align: right; padding-right: 10px; }
+
+    /* Đã gỡ bỏ position: sticky ở đây */
+    #edgeTable thead th {
+        background-color: #f1f5f9; 
+        color: #334155;
+    }
+
+    /* Khối hiển thị Diện Tích */
+    .result-box { 
+        background: transparent; 
+        padding: 15px 0 5px 12px;
+        border-radius: 0; 
+        border-left: 4px solid #27ae60; 
+        margin-top: 15px; 
+    }
+    .area-val { font-size: 18px; color: #e74c3c; font-weight: bold; }
+
+    #shareStatus { font-size: 12px; color: #27ae60; text-align: center; margin-top: 5px; margin-bottom: 10px; display: none; }  
+    
+    .point-label {
+        display: flex; align-items: center; justify-content: center;
+        background: transparent; color: #CCFF00; font-weight: 300; font-size: 11px;
+        text-shadow: 1px 1px 0px #000, -1px -1px 0px #000;
+    }
+  
+    .khung-nhap-toa-do {
+        display: flex; border: 1px solid #ccc; border-radius: 5px;
+        max-width: 400px; background: #fff;
+        font-family: &#39;Courier New&#39;, Courier, monospace; font-size: 14px; line-height: 16px; 
+        height: 150px; margin: 5px 0;
+    }
+
+    .cot-so-thu-tu {
+        padding: 10px 5px; background-color: #f8f9fa; color: #adb5bd; 
+        text-align: right; min-width: 20px; border-right: 1px solid #e9ecef;
+        overflow: hidden; user-select: none; margin: 0; 
+    }
+
+    .textarea-toa-do {
+        flex: 1; padding: 10px; border: none; resize: none; outline: none;
+        overflow-y: auto; white-space: pre; background: transparent;
+        font-family: inherit; font-size: inherit; line-height: inherit; margin: 0; height: 100%; 
+    }  
+
+    input[type=&quot;search&quot;]::-webkit-search-decoration,
+    input[type=&quot;search&quot;]::-webkit-search-cancel-button,
+    input[type=&quot;search&quot;]::-webkit-search-results-button,
+    input[type=&quot;search&quot;]::-webkit-search-results-decoration { -webkit-appearance: none; display: none; }  
+
+    #statusBox {
+        margin: 6px 0 12px 0; padding: 10px 12px;
+        font-size: 13px; line-height: 1.5; font-weight: 500;
+        color: #334155; background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        border: 1px solid #e2e8f0; border-left: 4px solid #f97316; 
+        border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        transition: all 0.2s ease; letter-spacing: 0.2px;
+    }
+    #statusBox:hover { background: #f1f5f9; }
+
+    .box-wrapper { position: relative; padding-right: 36px; min-height: 30px; }
+    .help-button {
+        position: absolute; top: 46%; transform: translateY(-50%); right: 4px; 
+        display: flex; align-items: center; justify-content: center;
+        width: 28px; height: 28px; color: #9ca3af; border-radius: 50%; transition: all 0.2s ease;
+    }
+    .help-button:hover { color: #3b82f6; background-color: #eff6ff; }  
+    
+    .hidden { display: none !important; }  
+
+    /* ------------------------------------------------------------------- */
+    /* TƯƠNG THÍCH MOBILE TỔNG HỢP */
+    /* ------------------------------------------------------------------- */
+    @media (max-width: 768px) {
+        #diachinh-app { flex-direction: column; }
+        #diachinh-map { order: 1; height: 80%; width: 100%; flex-grow: 0; }
+        #divider { order: 2; display: flex !important; }
         
+        #diachinh-sidebar { 
+            order: 3; width: 100%; height: 20%; 
+            border-right: none; border-top: 1px solid #ddd;
+            border-radius: 15px 15px 0 0; 
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1); 
+            z-index: 10; overflow-y: auto; display: block; 
+        }
+
+        #diachinh-sidebar h3 { font-size: 18px; margin-bottom: 10px; }
+
+        .khung-nhap-toa-do {
+            min-height: 80px; height: auto !important; margin-bottom: 10px;
+        }
+        .textarea-toa-do { height: 100px !important; }
+        
+        .btn-gmap { 
+            bottom: auto !important; top: 15px !important; right: 10px !important; 
+            padding: 8px 12px !important; font-size: 11px !important; 
+        }
+        #statusBox { font-size: 12px; padding: 8px 10px; }
+    }
+  
+
+/* Màu cho node đầu và cuối */
+.first-node { border-color: #27ae60 !important; }
+.last-node { border-color: #e74c3c !important; }
+
+/* Nút bấm dùng chung trong popup */
+.popup-btn {
+    display: block;
+    width: 100%;
+    color: white !important;
+    border: none;
+    padding: 7px 10px;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: background 0.2s;
+}
+.popup-btn:hover { opacity: 0.85; }
+
+/* Từng màu riêng cho từng nút */
+.btn-gmaps { background: #10b981; } /* Xanh ngọc Google Maps */
+.btn-remove { background: #ef4444; } /* Đỏ Xóa */
+.btn-add { background: #3b82f6; margin-bottom: 0; } /* Xanh dương Add Point */
+
+  
+  
+  
+  
+/* CSS cho Loading Screen */
+.qms-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff; /* Màu nền lúc tải */
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+}
+
+/* Class để ẩn loading */
+.qms-loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Vòng xoay Loading */
+.qms-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #2563eb; /* Màu xanh dương */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+.qms-loading-text {
+    font-family: Arial, sans-serif;
+    color: #4b5563;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}  
+  
+
+#PageList1 {
+  padding: 15px !important;
+  background: #f8f9fa !important;
+  border-radius: 8px;
+}
+
+#PageList1 ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#PageList1 li {
+  border-bottom: 1px solid #eee; /* Đường kẻ mờ ngăn cách */
+  padding: 8px 0 !important;
+}
+
+#PageList1 li:last-child {
+  border-bottom: none;
+}
+
+#PageList1 li a {
+  color: #3c4043 !important;
+  font-size: 14px;
+  text-decoration: none !important;
+  display: block;
+  transition: padding-left 0.2s;
+}
+
+#PageList1 li a:hover {
+  color: #1a73e8 !important;
+  padding-left: 5px; /* Hiệu ứng dịch chuyển nhẹ khi hover */
+}
+  
+  
+  
+/* Tổng thể Widget Popular Posts - Cùng khung nền với PageList */
+#PopularPosts1 {
+  padding: 15px !important;
+  background: #f8f9fa !important;
+  border-radius: 8px;
+  margin-top: 20px; /* Tạo khoảng cách với widget bên trên */
+}
+
+/* Kiểu dáng cho Tiêu đề &quot;Popular Posts&quot; */
+#PopularPosts1 h2 {
+  margin: 0 0 15px 0 !important;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #1a73e8; /* Nhấn nhá gạch chân xanh Google */
+  color: #202124 !important;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Định dạng danh sách bài viết */
+#PopularPosts1 ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#PopularPosts1 li {
+  border-bottom: 1px solid #eee; /* Đường kẻ mờ ngăn cách các bài */
+  padding: 10px 0 !important; /* Đẩy đệm một chút cho tiêu đề dài dễ thở */
+}
+
+#PopularPosts1 li:last-child {
+  border-bottom: none;
+  padding-bottom: 0 !important;
+}
+
+/* Định dạng Link bài viết */
+#PopularPosts1 li a {
+  color: #3c4043 !important;
+  font-size: 14px;
+  line-height: 1.5; /* Cực kỳ quan trọng: Giúp các tiêu đề dài xuống dòng không bị dính chữ */
+  text-decoration: none !important;
+  display: block;
+  transition: all 0.2s ease;
+}
+
+/* Hiệu ứng khi di chuột vào */
+#PopularPosts1 li a:hover {
+  color: #1a73e8 !important;
+  padding-left: 5px; /* Dịch chuyển nhẹ nhàng giống hệt menu Pages */
+}
+
+/* Ẩn div thừa */
+#PopularPosts1 .clear {
+  display: none;
+}  
+  
+  
+        .qms-marker {
+            background-color: rgba(44, 62, 80, 0.4);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }  
+  
+  
 
     </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -84,8 +445,7 @@
 <script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-auth-compat.js"></script>
 
-  <script type="module" crossorigin src="/assets/index-DN9IDy3e.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-DM5dZq9h.css">
+  <script type="module" crossorigin src="/assets/index-uH0OK7-R.js"></script>
 </head>
 <body>
 
@@ -96,53 +456,18 @@
     
 <div id="diachinh-app">
     <div id="diachinh-sidebar">
-
         
-
-
         <h3 style="margin-top:0; display: none;">📍 Quick Map Share .com</h3>
         
-        <div id="auth-box" style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; max-width: 300px; text-align: center; margin: 20px auto;">
-          <div id="user-info" style="display: none; margin-bottom: 15px;">
-            <img id="user-avatar" src="" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-bottom: 10px;">
-            <div id="user-name" style="font-weight: bold; font-family: sans-serif;"></div>
-          </div>
+        <div style="display: none;">
+            <label data-i18n="sidebar.select_province">Select Province:</label>
+            <select id="meridian"></select>
+        </div>
 
-          <div id="inapp-warning-box" style="display: none; background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 12px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; text-align: center; line-height: 1.5;">
-            <strong>&#9888;&#65039; <span data-i18n="auth.inapp_warn_title">Unsupported Browser</span></strong><br>
-            <span data-i18n="auth.inapp_warn_desc">Please tap the 3 dots in the top right corner and select "Open in browser" (Chrome/Safari) to sign in with Google.</span>
-          </div>
-
-          <div id="btn-login" style="font-family: sans-serif; font-size: 14px; color: #555; text-align: center; padding: 10px 0;">
-            <span data-i18n="auth.manage_maps">Manage your maps easily:</span> 
-            <a data-i18n="auth.sign_in" href="javascript:void(0)" onclick="loginGoogle()" onmouseout="this.style.textDecoration='none'" onmouseover="this.style.textDecoration='underline'" style="color: #1a73e8; text-decoration: none; font-weight: 600; white-space: nowrap;">
-              Sign in with Google
-            </a>
-          </div>
-          
-          <button data-i18n="auth.sign_out" id="btn-logout" onclick="logout()" style="display: none; background: #ea4335; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-family: sans-serif; font-size: 14px; width: 100%; margin-top: 10px;">
-            Sign out
-          </button>
-          
-          <div id="my-maps-box" style="display: none; margin-top: 15px; text-align: left; border-top: 1px solid #eee; padding-top: 15px;">
-            
-<div style="margin-bottom: 10px;">
-    <a href="javascript:void(0)" 
-       onclick="window.showSnapshotsView()" 
-       style="text-decoration: none; color: #1a73e8; font-weight: bold; font-family: sans-serif; font-size: 14px; display: flex; align-items: center; gap: 5px; cursor: pointer;"
-       onmouseover="this.style.textDecoration='underline'" 
-       onmouseout="this.style.textDecoration='none'">
-        <span data-i18n="auth.my_maps_title">Bản đồ của tôi</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
-    </a>
-</div>            
-
-            <div id="my-maps-list" style="font-family: sans-serif; font-size: 13px;"></div>
-          </div>
-        </div>      
-
-
-
+        <div id="customM-box">
+            <label for="manualM" data-i18n="sidebar.central_meridian">Central Meridian (L0):</label>
+            <input id="manualM" type="number" step="0.01" placeholder="e.g., 105.5" data-i18n-placeholder="sidebar.placeholder_meridian">
+        </div>
 
         <div class="box-wrapper">
             <div data-i18n="status_box.idle" id="statusBox">
@@ -185,7 +510,33 @@
             </div>          
         </div>
       
+        <div id="auth-box" style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; max-width: 300px; text-align: center; margin: 20px auto;">
+          <div id="user-info" style="display: none; margin-bottom: 15px;">
+            <img id="user-avatar" src="" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-bottom: 10px;">
+            <div id="user-name" style="font-weight: bold; font-family: sans-serif;"></div>
+          </div>
 
+          <div id="inapp-warning-box" style="display: none; background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 12px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; text-align: center; line-height: 1.5;">
+            <strong>&#9888;&#65039; <span data-i18n="auth.inapp_warn_title">Unsupported Browser</span></strong><br>
+            <span data-i18n="auth.inapp_warn_desc">Please tap the 3 dots in the top right corner and select "Open in browser" (Chrome/Safari) to sign in with Google.</span>
+          </div>
+
+          <div id="btn-login" style="font-family: sans-serif; font-size: 14px; color: #555; text-align: center; padding: 10px 0;">
+            <span data-i18n="auth.manage_maps">Manage your maps easily:</span> 
+            <a data-i18n="auth.sign_in" href="javascript:void(0)" onclick="loginGoogle()" onmouseout="this.style.textDecoration='none'" onmouseover="this.style.textDecoration='underline'" style="color: #1a73e8; text-decoration: none; font-weight: 600; white-space: nowrap;">
+              Sign in with Google
+            </a>
+          </div>
+          
+          <button data-i18n="auth.sign_out" id="btn-logout" onclick="logout()" style="display: none; background: #ea4335; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-family: sans-serif; font-size: 14px; width: 100%; margin-top: 10px;">
+            Sign out
+          </button>
+          
+          <div id="my-maps-box" style="display: none; margin-top: 15px; text-align: left; border-top: 1px solid #eee; padding-top: 15px;">
+            <div data-i18n="auth.my_maps_title" style="font-weight: bold; font-family: sans-serif; font-size: 14px; margin-bottom: 10px; color: #333;">Bản đồ của tôi:</div>
+            <div id="my-maps-list" style="font-family: sans-serif; font-size: 13px;"></div>
+          </div>
+        </div>      
     </div>
     
     <div id="divider">
@@ -195,20 +546,7 @@
     <div id="diachinh-map">
     </div>
     
-    <div id="snapshots-window" style="display: none;">
-        <div class="snapshots-header">
-            
-            
-            <button onclick="createNewMap()" class="btn-create-new">
-                <span style="margin-right: 5px;">+</span>
-                <span data-i18n="auth.btn_new_map">New Map</span>
-            </button>
-        </div>
-        
-        <div id="snapshots-grid"></div>
-    </div>
-
-
+    
 </div>
 
 
