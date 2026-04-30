@@ -20,9 +20,8 @@
     <meta property="og:url" content="https://app.quickmapshare.com">
     <meta property="og:type" content="website">
     <style>
-        #navbar-iframe {
-        display: none !important;
-        }
+
+
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; height: 100vh; margin: 0; background: #eef2f3; }
 
         .sidebar {
@@ -85,7 +84,7 @@
         -webkit-overflow-scrolling: touch;
     }
 
-    #diachinh-map, #my-maps-list{ 
+    #diachinh-map { 
         flex-grow: 1; height: 100%; background: #e5e3df; z-index: 1; position: relative; 
     }
     
@@ -172,7 +171,7 @@
     .khung-nhap-toa-do {
         display: flex; border: 1px solid #ccc; border-radius: 5px;
         max-width: 400px; background: #fff;
-        font-family: &#39;Courier New&#39;, Courier, monospace; font-size: 14px; line-height: 16px; 
+        font-family: 'Courier New', Courier, monospace; font-size: 14px; line-height: 16px; 
         height: 150px; margin: 5px 0;
     }
 
@@ -217,8 +216,8 @@
     /* TƯƠNG THÍCH MOBILE TỔNG HỢP */
     /* ------------------------------------------------------------------- */
     @media (max-width: 768px) {
-        #diachinh-app, #my-maps-list { flex-direction: column; }
-        #diachinh-map, #my-maps-list { order: 1; height: 80%; width: 100%; flex-grow: 0; }
+        #diachinh-app { flex-direction: column; }
+        #diachinh-map { order: 1; height: 80%; width: 100%; flex-grow: 0; }
         #divider { order: 2; display: flex !important; }
         
         #diachinh-sidebar { 
@@ -321,101 +320,6 @@
     100% { transform: rotate(360deg); }
 }  
   
-
-#PageList1 {
-  padding: 15px !important;
-  background: #f8f9fa !important;
-  border-radius: 8px;
-}
-
-#PageList1 ul {
-  list-style: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-#PageList1 li {
-  border-bottom: 1px solid #eee; /* Đường kẻ mờ ngăn cách */
-  padding: 8px 0 !important;
-}
-
-#PageList1 li:last-child {
-  border-bottom: none;
-}
-
-#PageList1 li a {
-  color: #3c4043 !important;
-  font-size: 14px;
-  text-decoration: none !important;
-  display: block;
-  transition: padding-left 0.2s;
-}
-
-#PageList1 li a:hover {
-  color: #1a73e8 !important;
-  padding-left: 5px; /* Hiệu ứng dịch chuyển nhẹ khi hover */
-}
-  
-  
-  
-/* Tổng thể Widget Popular Posts - Cùng khung nền với PageList */
-#PopularPosts1 {
-  padding: 15px !important;
-  background: #f8f9fa !important;
-  border-radius: 8px;
-  margin-top: 20px; /* Tạo khoảng cách với widget bên trên */
-}
-
-/* Kiểu dáng cho Tiêu đề &quot;Popular Posts&quot; */
-#PopularPosts1 h2 {
-  margin: 0 0 15px 0 !important;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #1a73e8; /* Nhấn nhá gạch chân xanh Google */
-  color: #202124 !important;
-  font-size: 16px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* Định dạng danh sách bài viết */
-#PopularPosts1 ul {
-  list-style: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-#PopularPosts1 li {
-  border-bottom: 1px solid #eee; /* Đường kẻ mờ ngăn cách các bài */
-  padding: 10px 0 !important; /* Đẩy đệm một chút cho tiêu đề dài dễ thở */
-}
-
-#PopularPosts1 li:last-child {
-  border-bottom: none;
-  padding-bottom: 0 !important;
-}
-
-/* Định dạng Link bài viết */
-#PopularPosts1 li a {
-  color: #3c4043 !important;
-  font-size: 14px;
-  line-height: 1.5; /* Cực kỳ quan trọng: Giúp các tiêu đề dài xuống dòng không bị dính chữ */
-  text-decoration: none !important;
-  display: block;
-  transition: all 0.2s ease;
-}
-
-/* Hiệu ứng khi di chuột vào */
-#PopularPosts1 li a:hover {
-  color: #1a73e8 !important;
-  padding-left: 5px; /* Dịch chuyển nhẹ nhàng giống hệt menu Pages */
-}
-
-/* Ẩn div thừa */
-#PopularPosts1 .clear {
-  display: none;
-}  
-  
   
         .qms-marker {
             background-color: rgba(44, 62, 80, 0.4);
@@ -445,7 +349,7 @@
 <script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-auth-compat.js"></script>
 
-  <script type="module" crossorigin src="/assets/index-C4jBHhtx.js"></script>
+  <script type="module" crossorigin src="./assets/index-C6X6f7cq.js"></script>
 </head>
 <body>
 
@@ -459,7 +363,7 @@
         
         <h3 style="margin-top:0; display: none;">📍 Quick Map Share .com</h3>
         
-        <div id="auth-box" style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; max-width: 300px; text-align: center; margin: 20px auto;">
+        <div id="auth-box" style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; max-width: 300px; text-align: center; margin: 10px auto;">
           <div id="user-info" style="display: none; margin-bottom: 15px;">
             <img id="user-avatar" src="" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-bottom: 10px;">
             <div id="user-name" style="font-weight: bold; font-family: sans-serif;"></div>
@@ -483,11 +387,16 @@
           
           <div id="my-maps-box" style="display: none; margin-top: 15px; text-align: left; border-top: 1px solid #eee; padding-top: 15px;">
             
-            <a href="javascript:void(0)" onclick="window.showMyMapList()" style="color: blue; cursor: pointer; text-decoration: none;">
-                <span data-i18n="auth.my_maps_title" style="pointer-events: none; font-weight: bold; font-family: sans-serif; font-size: 14px; color: #333; text-decoration: underline;">
-                    Bản đồ của tôi
-                </span>
-            </a>
+            <div style="margin-bottom: 10px;">
+                <a href="javascript:void(0)" 
+                onclick="window.showSnapshotsView()" 
+                style="text-decoration: none; color: #1a73e8; font-weight: bold; font-family: sans-serif; font-size: 14px; display: flex; align-items: center; gap: 5px; cursor: pointer;"
+                onmouseover="this.style.textDecoration='underline'" 
+                onmouseout="this.style.textDecoration='none'">
+                    <span data-i18n="auth.my_maps_title">Bản đồ của tôi</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+                </a>
+            </div>
           </div>
         </div>    
 
@@ -502,7 +411,7 @@
             <input id="manualM" type="number" step="0.01" placeholder="e.g., 105.5" data-i18n-placeholder="sidebar.placeholder_meridian">
         </div>
 
-        <div class="box-wrapper">
+        <div class="box-wrapper" style="margin: 20px auto;">
             <div data-i18n="status_box.idle" id="statusBox">
                 Start: &#11040; Polygon / &#8605; Line
             </div>
@@ -552,10 +461,45 @@
     
     <div id="diachinh-map">
     </div>
-    <div id="my-maps-list" style="display: none;"></div>
+    
+<div id="snapshots-window" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #f8f9fa; z-index: 999999; flex-direction: column; overflow: hidden;">
+    
+    <div style="padding: 16px 24px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center; background: #fff; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        <h2 data-i18n="auth.my_maps_title" style="margin: 0; font-size: 20px; color: #202124; font-family: sans-serif;">Bản đồ của tôi</h2>
+        
+        <div style="display: flex; gap: 12px;">
+            <button onclick="createNewMap()" data-i18n-title="auth.btn_new_map" title="Tạo bản đồ mới" 
+                    style="background: #1a73e8; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(26,115,232,0.4); transition: transform 0.1s, background 0.2s;" 
+                    onmouseover="this.style.background='#1557b0'; this.style.transform='scale(1.05)';" 
+                    onmouseout="this.style.background='#1a73e8'; this.style.transform='scale(1)';">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </button>
+
+            <button onclick="document.getElementById('snapshots-window').style.display='none'" title="Close" 
+                    style="background: #f1f3f4; color: #5f6368; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s, color 0.2s;" 
+                    onmouseover="this.style.background='#e8eaed'; this.style.color='#202124';" 
+                    onmouseout="this.style.background='#f1f3f4'; this.style.color='#5f6368';">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="snapshots-grid" style="flex: 1; overflow-y: auto; padding: 32px; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; align-content: flex-start; box-sizing: border-box; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;">
+        </div>
     
 </div>
 
+
+</div>
+
+
+     
 
 
   </body>
