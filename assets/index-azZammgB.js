@@ -124,14 +124,16 @@
         font-family: sans-serif !important;
         pointer-events: auto !important;
     `,s.innerHTML=`
-        <div style="background:white; width:90%; max-width:400px; border-radius:12px; padding:20px; box-shadow:0 10px 25px rgba(0,0,0,0.2); position:relative;">
+        <div style="background:white; width:90%; max-width:400px; border-radius:12px; padding:20px; box-sizing:border-box; box-shadow:0 10px 25px rgba(0,0,0,0.2); position:relative;">
             
             <button onclick="document.getElementById('${o}').remove()" 
-                    style="position:absolute; top:16px; right:16px; background:none; border:none; cursor:pointer; font-size:18px; color:#5f6368; padding:4px; line-height:1;">
+                    style="position:absolute; top:12px; right:12px; width:32px; height:32px; display:flex; align-items:center; justify-content:center; background:transparent; border:none; border-radius:50%; cursor:pointer; font-size:16px; color:#5f6368; margin:0; padding:0; z-index:10; transition:background 0.2s;"
+                    onmouseover="this.style.background='#f1f3f4'"
+                    onmouseout="this.style.background='transparent'">
                 ✕
             </button>
 
-            <div style="margin-bottom:15px; padding-right:24px;">
+            <div style="margin-bottom:15px; padding-right:30px;">
                 <h3 style="margin:0; font-size:18px; color:#202124;">🏷️ ${e(`labels.modal_title`,`Quản lý nhãn`)}</h3>
             </div>
             
