@@ -60,19 +60,19 @@
                         ${e(`subscription.used_maps`,`Bác đã dùng`)} <b>${i}/${t}</b> ${e(`subscription.maps_limit`,`bản đồ.`)} 
                         ${o?e(`subscription.plus_max_warn`,`Bác sắp đạt giới hạn tối đa của gói Plus.`):`<span onclick="openUpgradeModal()" style="color: #1a73e8; text-decoration: underline; font-weight: 600; cursor: pointer;">${e(`subscription.upgrade_link`,`Nâng cấp QMS Plus`)}</span> ${e(`subscription.to_expand`,`để thoải mái lưu trữ lên đến 10000 bản đồ nhé!`)}`}
                     </div>
-                </div>`}let s=n.data.map(n=>{let r=n.title||`${e(`auth.snapshot`,`Bản đồ `)}${n.short_code}`,i=$===void 0?`en-GB`:$,a=n.created_at;typeof a==`string`&&(a=a.replace(/-/g,`/`).replace(/T/g,` `).split(`.`)[0]);let o=new Date(a).toLocaleDateString(i,{year:`numeric`,month:`2-digit`,day:`2-digit`}),s=n.thumbnail_url,c=n.labels||[],l=encodeURIComponent(JSON.stringify(c)),u=c.length>0?`<div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:6px;">
-        ${c.map(e=>`<span onclick="clickLabelOnCard(event, '${e}')" 
-                style="background:transparent; color:#475569; border:1px solid #d1d5db; padding:2px 10px; border-radius:12px; font-size:11px; font-weight:500; cursor:pointer; transition:all 0.2s ease; display:inline-block; box-sizing:border-box;"
-                onmouseover="this.style.background='#f0f7ff'; this.style.borderColor='#1a73e8'; this.style.color='#1a73e8'; this.style.transform='translateY(-1px)';"
-                onmouseout="this.style.background='transparent'; this.style.borderColor='#d1d5db'; this.style.color='#475569'; this.style.transform='none';">
-                ${e}
-            </span>`).join(``)}
-    </div>`:`<div onclick="event.stopPropagation(); openLabelModal('${n.short_code}', '${l}', '${t}')" 
-        style="display:inline-block; margin-top:6px; font-size:11px; color:#1a73e8; padding:2px 10px; border:1px dashed #1a73e8; border-radius:12px; cursor:pointer; font-weight:500; transition:all 0.2s ease;"
-        onmouseover="this.style.background='#f0f7ff'" 
-        onmouseout="this.style.background='transparent'">
-        + ${e(`labels.add_label`,`Thêm nhãn`)}
-    </div>`;return`
+                </div>`}let s=n.data.map(n=>{let r=n.title||`${e(`auth.snapshot`,`Bản đồ `)}${n.short_code}`,i=$===void 0?`en-GB`:$,a=n.created_at;typeof a==`string`&&(a=a.replace(/-/g,`/`).replace(/T/g,` `).split(`.`)[0]);let o=new Date(a).toLocaleDateString(i,{year:`numeric`,month:`2-digit`,day:`2-digit`}),s=n.thumbnail_url,c=n.labels||[],l=encodeURIComponent(JSON.stringify(c));window.currentActiveTags=window.currentActiveTags||[];let u=c.length>0?`<div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:6px;">
+      ${c.map(e=>{let t=window.currentActiveTags.includes(e);return`<span class="map-tag-badge" data-tag="${e}" onclick="clickLabelOnCard(event, '${e}')" 
+              style="background:${t?`#1a73e8`:`transparent`}; color:${t?`#ffffff`:`#475569`}; border:1px solid ${t?`#1a73e8`:`#d1d5db`}; padding:2px 10px; border-radius:12px; font-size:11px; font-weight:500; cursor:pointer; transition:all 0.2s ease; display:inline-block; box-sizing:border-box;"
+              onmouseover="if(!(window.currentActiveTags || []).includes('${e}')) { this.style.background='#f0f7ff'; this.style.borderColor='#1a73e8'; this.style.color='#1a73e8'; this.style.transform='translateY(-1px)'; }"
+              onmouseout="if(!(window.currentActiveTags || []).includes('${e}')) { this.style.background='transparent'; this.style.borderColor='#d1d5db'; this.style.color='#475569'; this.style.transform='none'; }">
+              ${e}
+          </span>`}).join(``)}
+  </div>`:`<div onclick="event.stopPropagation(); openLabelModal('${n.short_code}', '${l}', '${t}')" 
+      style="display:inline-block; margin-top:6px; font-size:11px; color:#1a73e8; padding:2px 10px; border:1px dashed #1a73e8; border-radius:12px; cursor:pointer; font-weight:500; transition:all 0.2s ease;"
+      onmouseover="this.style.background='#f0f7ff'" 
+      onmouseout="this.style.background='transparent'">
+      + ${e(`labels.add_label`,`Thêm nhãn`)}
+  </div>`;return`
                 <div class="map-card" style="background:white; border:1px solid #dadce0; border-radius:12px; position:relative; font-family:sans-serif;" 
                      onmouseover="this.style.boxShadow='0 4px 10px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
                     
@@ -119,7 +119,7 @@
              </button>`,n.forEach(e=>{let t=K.includes(e);a+=`<button data-tag="${e}" onclick="filterMapsByTag('${e}')" 
                          style="background:${t?o:`transparent`}; color:${t?`white`:s}; border:1px solid ${t?o:c}; padding:5px 14px; border-radius:16px; cursor:pointer; font-size:13px; font-weight:600; white-space:nowrap; transition:all 0.2s ease; margin-left:6px;">
                     ${e} ${t?`✕`:``}
-                 </button>`}),a+=`</div>`,t.innerHTML=a;let u=t.querySelector(`div`);u&&r>0&&(u.scrollLeft=r)}window.filterMapsByTag=function(e){if(e!==null){let t=K.indexOf(e);t>-1?K.splice(t,1):K.push(e)}else K=[];q(),document.querySelectorAll(`#snapshots-grid .map-card`).forEach((e,t)=>{let n=G[t];if(n)if(K.length===0)e.style.display=`block`;else{let t=n.labels||[],r=K.every(e=>t.includes(e));e.style.display=r?`block`:`none`}})},window.clickLabelOnCard=function(e,t){e.stopPropagation(),typeof filterMapsByTag==`function`&&(filterMapsByTag(t),setTimeout(()=>{let e=document.querySelector(`button[data-tag="${t}"]`);e&&e.scrollIntoView({behavior:`smooth`,inline:`center`,block:`nearest`})},150))};var J=[],Y=[];window.openLabelModal=async function(t,n,r){console.log(`1. Khởi động Modal cho:`,t);let i=document.getElementById(`menu-${t}`);i&&(i.style.display=`none`);let a=r;if(!a)try{a=await firebase.auth().currentUser.getIdToken()}catch{console.error(`Không lấy được Token Auth`),alert(e(`auth.error`,`Vui lòng đăng nhập lại!`));return}try{J=JSON.parse(decodeURIComponent(n))}catch{J=[]}let o=`label-modal-overlay`,s=document.getElementById(o);s&&s.remove(),s=document.createElement(`div`),s.id=o,s.style.cssText=`
+                 </button>`}),a+=`</div>`,t.innerHTML=a;let u=t.querySelector(`div`);u&&r>0&&(u.scrollLeft=r)}window.filterMapsByTag=function(e){if(e===null)window.currentActiveTags=[];else{let t=window.currentActiveTags.indexOf(e);t>-1?window.currentActiveTags.splice(t,1):window.currentActiveTags.push(e)}if(e!==null){let t=K.indexOf(e);t>-1?K.splice(t,1):K.push(e)}else K=[];q(),document.querySelectorAll(`#snapshots-grid .map-card`).forEach((e,t)=>{let n=G[t];if(n)if(K.length===0)e.style.display=`block`;else{let t=n.labels||[],r=K.every(e=>t.includes(e));e.style.display=r?`block`:`none`}}),document.querySelectorAll(`.map-tag-badge`).forEach(e=>{let t=e.getAttribute(`data-tag`);window.currentActiveTags.includes(t)?(e.style.background=`#1a73e8`,e.style.color=`#ffffff`,e.style.borderColor=`#1a73e8`):(e.style.background=`transparent`,e.style.color=`#475569`,e.style.borderColor=`#d1d5db`)})},window.clickLabelOnCard=function(e,t){e.stopPropagation(),typeof filterMapsByTag==`function`&&(filterMapsByTag(t),setTimeout(()=>{let e=document.querySelector(`button[data-tag="${t}"]`);e&&e.scrollIntoView({behavior:`smooth`,inline:`center`,block:`nearest`})},150))};var J=[],Y=[];window.openLabelModal=async function(t,n,r){console.log(`1. Khởi động Modal cho:`,t);let i=document.getElementById(`menu-${t}`);i&&(i.style.display=`none`);let a=r;if(!a)try{a=await firebase.auth().currentUser.getIdToken()}catch{console.error(`Không lấy được Token Auth`),alert(e(`auth.error`,`Vui lòng đăng nhập lại!`));return}try{J=JSON.parse(decodeURIComponent(n))}catch{J=[]}let o=`label-modal-overlay`,s=document.getElementById(o);s&&s.remove(),s=document.createElement(`div`),s.id=o,s.style.cssText=`
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
