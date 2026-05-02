@@ -61,13 +61,18 @@
                         ${o?e(`subscription.plus_max_warn`,`Bác sắp đạt giới hạn tối đa của gói Plus.`):`<span onclick="openUpgradeModal()" style="color: #1a73e8; text-decoration: underline; font-weight: 600; cursor: pointer;">${e(`subscription.upgrade_link`,`Nâng cấp QMS Plus`)}</span> ${e(`subscription.to_expand`,`để thoải mái lưu trữ lên đến 10000 bản đồ nhé!`)}`}
                     </div>
                 </div>`}let s=n.data.map(n=>{let r=n.title||`${e(`auth.snapshot`,`Bản đồ `)}${n.short_code}`,i=$===void 0?`en-GB`:$,a=n.created_at;typeof a==`string`&&(a=a.replace(/-/g,`/`).replace(/T/g,` `).split(`.`)[0]);let o=new Date(a).toLocaleDateString(i,{year:`numeric`,month:`2-digit`,day:`2-digit`}),s=n.thumbnail_url,c=n.labels||[],l=encodeURIComponent(JSON.stringify(c)),u=c.length>0?`<div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:6px;">
-                        ${c.map(e=>`<span onclick="clickLabelOnCard(event, '${e}')" 
-                                style="background:transparent; color:#475569; border:1px solid #d1d5db; padding:2px 10px; border-radius:12px; font-size:11px; font-weight:500; cursor:pointer; transition:all 0.2s ease; display:inline-block; box-sizing:border-box;"
-                                onmouseover="this.style.background='#f0f7ff'; this.style.borderColor='#1a73e8'; this.style.color='#1a73e8'; this.style.transform='translateY(-1px)';"
-                                onmouseout="this.style.background='transparent'; this.style.borderColor='#d1d5db'; this.style.color='#475569'; this.style.transform='none';">
-                                ${e}
-                            </span>`).join(``)}
-                    </div>`:``;return`
+        ${c.map(e=>`<span onclick="clickLabelOnCard(event, '${e}')" 
+                style="background:transparent; color:#475569; border:1px solid #d1d5db; padding:2px 10px; border-radius:12px; font-size:11px; font-weight:500; cursor:pointer; transition:all 0.2s ease; display:inline-block; box-sizing:border-box;"
+                onmouseover="this.style.background='#f0f7ff'; this.style.borderColor='#1a73e8'; this.style.color='#1a73e8'; this.style.transform='translateY(-1px)';"
+                onmouseout="this.style.background='transparent'; this.style.borderColor='#d1d5db'; this.style.color='#475569'; this.style.transform='none';">
+                ${e}
+            </span>`).join(``)}
+    </div>`:`<div onclick="event.stopPropagation(); openLabelModal('${n.short_code}', '${l}', '${t}')" 
+        style="display:inline-block; margin-top:6px; font-size:11px; color:#1a73e8; padding:2px 10px; border:1px dashed #1a73e8; border-radius:12px; cursor:pointer; font-weight:500; transition:all 0.2s ease;"
+        onmouseover="this.style.background='#f0f7ff'" 
+        onmouseout="this.style.background='transparent'">
+        + ${e(`labels.add_label`,`Thêm nhãn`)}
+    </div>`;return`
                 <div class="map-card" style="background:white; border:1px solid #dadce0; border-radius:12px; position:relative; font-family:sans-serif;" 
                      onmouseover="this.style.boxShadow='0 4px 10px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
                     
@@ -78,6 +83,7 @@
                     </div>
 
                     <div style="padding:12px 16px; display:flex; align-items:flex-start; gap:10px;">
+                    
                         <div style="flex:1; min-width:0; cursor:pointer;" onclick="getMapData('${n.short_code}')">
                             <div style="font-size:14px; font-weight:600; color:#202124; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${r}">${r}</div>
                             <div style="font-size:12px; color:#5f6368; margin-top:4px;">${o}</div>
