@@ -629,7 +629,7 @@
     <script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-auth-compat.js"></script>
 
-  <script type="module" crossorigin src="./assets/index-B1R1wP5I.js"></script>
+  <script type="module" crossorigin src="./assets/index-PvfayDxC.js"></script>
 </head>
 
 <body>
@@ -763,6 +763,16 @@
                 </div>
             </div>
 
+            <div id="embed-box" style="display: none; margin-top: 15px; padding: 10px; border: 1px dashed #3498db; background: #f0f8ff; border-radius: 6px;">
+                <button class="btn-share" id="btnGetEmbed" onclick="generateEmbedCode()" style="margin-bottom: 5px;" data-i18n="embed.btn_get_embed">
+                    🔗 Lấy mã nhúng (Embed)
+                </button>
+                
+                <textarea id="embedCodeInput" readonly 
+                        style="display:none; height: 70px; font-size: 12px; font-family: monospace; padding: 5px; background: #fff;" 
+                        data-i18n="embed.placeholder"
+                        placeholder="Mã nhúng sẽ hiển thị ở đây..."></textarea>
+            </div>
 
         </div>
 
@@ -844,7 +854,7 @@
         </div>
     </div>
 
-
+
 </body>
 
 </html>
