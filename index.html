@@ -10,9 +10,9 @@
     <meta name="author" content="QuickMapShare Team">
 
 
-    <link href='https://api.quickmapshare.com/favicon.svg?v=1' rel='icon' type='image/svg+xml' />
-    <link href='https://api.quickmapshare.com/favicon.svg?v=1' rel='shortcut icon' type='image/svg+xml' />
-    <link href='https://api.quickmapshare.com/favicon.svg?v=1' rel='apple-touch-icon' />
+    <link href='./favicon.svg?v=1' rel='icon' type='image/svg+xml' />
+    <link href='./favicon.svg?v=1' rel='shortcut icon' type='image/svg+xml' />
+    <link href='./favicon.svg?v=1' rel='apple-touch-icon' />
 
     <meta property="og:title" content="QuickMapShare - Create & Share Map Routes and Areas">
     <meta property="og:description" content="Draw, create, and instantly share your custom routes and polygons as direct links or animated thumbnails.">
@@ -629,7 +629,7 @@
     <script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.12.1/firebase-auth-compat.js"></script>
 
-  <script type="module" crossorigin src="./assets/index-PvfayDxC.js"></script>
+  <script type="module" crossorigin src="./assets/index-8JYwJsh1.js"></script>
 </head>
 
 <body>
@@ -744,6 +744,17 @@
                 style="display: none; text-align: center; margin-top: 10px; margin-bottom: 10px; color: #3498db; text-decoration: none; font-weight: bold; padding: 5px; border: 1px dashed #3498db; border-radius: 4px;"
                 target="_blank">📖 Guide &amp; Help</a>
 
+            <div id="embed-box" style="display: none; margin-top: 15px; padding: 10px; border: 1px dashed #3498db; background: #f0f8ff; border-radius: 6px;">
+                <button class="btn-share" id="btnGetEmbed" onclick="generateEmbedCode()" style="margin-bottom: 5px; background-color: #f97316; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;" data-i18n="embed.btn_get_embed">
+                    🔗 Lấy mã nhúng (Embed)
+                </button>
+                
+                <textarea id="embedCodeInput" readonly="readonly" 
+                        style="display:none; height: 70px; font-size: 12px; font-family: monospace; padding: 5px; background: #fff; width: 100%; box-sizing: border-box;" 
+                        data-i18n="embed.placeholder"
+                        placeholder="Mã nhúng sẽ hiển thị ở đây..."></textarea>
+            </div>             
+
             <div id="results" style="display:none;">
                 <div class="table-container">
                     <table id="edgeTable">
@@ -763,16 +774,7 @@
                 </div>
             </div>
 
-            <div id="embed-box" style="display: none; margin-top: 15px; padding: 10px; border: 1px dashed #3498db; background: #f0f8ff; border-radius: 6px;">
-                <button class="btn-share" id="btnGetEmbed" onclick="generateEmbedCode()" style="margin-bottom: 5px;" data-i18n="embed.btn_get_embed">
-                    🔗 Lấy mã nhúng (Embed)
-                </button>
-                
-                <textarea id="embedCodeInput" readonly 
-                        style="display:none; height: 70px; font-size: 12px; font-family: monospace; padding: 5px; background: #fff;" 
-                        data-i18n="embed.placeholder"
-                        placeholder="Mã nhúng sẽ hiển thị ở đây..."></textarea>
-            </div>
+
 
         </div>
 
